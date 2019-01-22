@@ -1,0 +1,8 @@
+---
+# handlers file for installkibana
+- name: Enable Kibana
+  systemd: 
+    name: kibana
+    daemon_reload: yes
+    enabled: yes
+    state: started

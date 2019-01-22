@@ -1,0 +1,7 @@
+- name: Install httpd webserver
+  yum: pkg=httpd state=latest
+  when: "ansible_os_family == 'RedHat'"
+- name: Install Apache2  
+  apt: pkg=apache2 state=latest
+  when: "ansible_os_family == 'Debian'"
+  notify: Restart HTTPD

@@ -1,0 +1,14 @@
+--- # Install ELK Stack
+- name: Installing ELK Stack
+  hosts: elk
+  gather_facts: yes
+  user: cloud_user
+  roles:
+    - { role: installelk } 
+    - { role: installkibana }
+    - { role: installlogstash  }
+- name: Install auditbeat
+  hosts: lognode
+  user: cloud_user
+  roles:  
+    - { role: installbeats }

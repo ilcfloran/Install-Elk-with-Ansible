@@ -1,0 +1,29 @@
+---
+# tasks file for installing Elastic search
+#- name: Add Elastic gpg key
+#  apt_key:
+#    keyserver: https://pgp.mit.edu
+#    id: D88E42B4
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: installed
+- name: Download and Sign key
+  apt_key: 
+    id: D88E42B4
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+- apt_repository:
+    repo: 'deb https://artifacts.elastic.co/packages/6.x/apt stable main'
+    state: present
+- name: install elastic search
+  apt:
+    name: elasticsearch
+    update_cache: yes
+- name: Enable Elasticsearch
+  systemd:
+    name: elasticsearch
+    daemon_reload: yes
+    enabled: yes
+    state: started
+

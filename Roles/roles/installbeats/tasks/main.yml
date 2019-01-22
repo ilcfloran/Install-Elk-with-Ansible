@@ -1,0 +1,35 @@
+---
+# tasks file for installing Beats
+- name: Install Auditbeat
+  apt:
+    deb: https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-6.5.4-amd64.deb
+- template:
+    src: auditbeat.yml.j2
+    dest: /etc/auditbeat/auditbeat.yml
+    owner: root
+    group: root
+    mode: '0600'
+#- name : check if line - /home/cloud_user exists
+#  shell: grep "/home/cloud_user" /etc/auditbeat/auditbeat.yml
+#  register: test_grep
+#- debug: 
+#    var: test_grep
+#- name: Add /home/cloud_user to the audit configuration
+#  lineinfile:
+#    path: /etc/auditbeat/auditbeat.yml
+#    regexp: 'paths:'
+#    insertafter: 'paths:'
+#    line: '  - /home/cloud_user'
+#  when: test_grep.rc != 0
+#- name: Enable output to logstash
+#  lineinfile:
+#    path: /etc/auditbeat/auditbeat.yml
+#    regexp: '^#output.logstash:'
+#    line: 'output.logstash:'
+#- name: Add /home/cloud_user to the audit configuration
+#  lineinfile:
+#    path: /etc/auditbeat/auditbeat.yml
+#    regexp: 'output.logstash:'
+#    insertafter: 'output.logstash:'
+#    line: "  hosts: [{{ hostvars[groups['elk'][0]]['ansible_default_ipv4']['address'] }}:9200]"
+

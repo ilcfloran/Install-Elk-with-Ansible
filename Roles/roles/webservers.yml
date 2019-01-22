@@ -1,0 +1,10 @@
+--- 
+- hosts: apacheweb
+  pre_tasks:
+  - name: TimeSpan
+    raw: date > /home/cloud_user/startofrile.log
+  roles:
+    - webservers
+  post_tasks:
+  - name: Ends
+    raw: date > /home/cloud_user/endofrole.log

@@ -1,0 +1,23 @@
+--- # YAML Playbook
+- hosts: apacheweb
+  user: cloud_user
+  # Sudo will be depricated
+  become: yes
+  connection: ssh
+  # DO NOT GATHER FACTS FROM SETUP Module 
+  gather_facts: no
+  vars:
+    playbook_version: 0.1b
+  vars_files:
+    - /home/cloud_user/Playbooks/conf/webdefaults.yml
+    - /home/cloud_user/Playbooks/conf/copyright.yml
+  vars_prompt:
+    - name: web_domain
+      prompt: Web Domain
+  tasks:
+    - name: Install Apache Webserver
+      action: apt pkg=apache2 state=present
+      notify: Restart Apache
+  handlers:
+    - name: Restart Apache
+      action: service name=apache2 state=restarted 

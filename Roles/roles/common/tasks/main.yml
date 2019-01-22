@@ -1,0 +1,5 @@
+- name: Ensure GNUPG-curl is available for https
+  apt:
+    pkg: gnupg-curl
+    state: present
+    update_cache: yes

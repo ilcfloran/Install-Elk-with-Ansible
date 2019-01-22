@@ -1,0 +1,10 @@
+---
+# handlers file for installelk
+- name: Enable Elastic
+  service:
+    name: elasticsearch
+    state: enabled
+- name: Start Elastic
+  service:
+    name: elasticsearch
+    state: started

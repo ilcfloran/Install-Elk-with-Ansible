@@ -1,0 +1,6 @@
+---
+# tasks file for installjava
+- name: Install Java
+  apt:
+    pkg: default-jre
+    state: present

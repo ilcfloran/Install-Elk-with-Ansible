@@ -1,0 +1,27 @@
+---
+# tasks file for installlogstash
+- name: install logstash
+  apt:
+    name: logstash
+    update_cache: yes
+    state: installed
+- name: Enable logstash
+  systemd:
+    name: logstash
+    daemon_reload: yes
+    enabled: yes
+    state: started
+- name: copy input.conf
+  copy:
+    src: input.conf
+    dst: /etc/logstash/conf.d/input.conf
+    owner: root
+    group: root
+    mode: '0644'
+- name: copy input.conf
+  copy:
+    src: output.conf
+    dst: /etc/logstash/conf.d/output.conf
+    owner: root
+    group: root
+    mode: '0644'
